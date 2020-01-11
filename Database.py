@@ -11,8 +11,6 @@ def connect():
     return mydb
 
 def insert(query):
-    # sql = "INSERT INTO customers (name, address) VALUES (%s, %s)"
-    # val = ("John", "Highway 21")
     mydb = connect()
     mycursor = mydb.cursor()
     mycursor.execute(query)
