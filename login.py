@@ -1,9 +1,9 @@
-import Database
+import database
 import search
 import user
 
 def is_logged_in():
-    username = Database.select("SELECT username FROM users WHERE status = 'active'")
+    username = database.select("SELECT username FROM users WHERE status = 'active'")
     if username:
         return username
     else:
@@ -18,8 +18,8 @@ def show_login():
 
     # validation
     sql = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'"
-    if Database.select(sql):
-        Database.insert("UPDATE users SET status='active' WHERE username= '" + username + "'")
+    if database.select(sql):
+        database.insert("UPDATE users SET status='active' WHERE username= '" + username + "'")
         print('Login Successful')
         print('-' * 30)
         logged_user(username)
@@ -46,5 +46,5 @@ def logged_user(username):
         print('Wrong Input! Try Again')
 
 def logout():
-    Database.insert("UPDATE users SET status='inactive' WHERE status = 'active'")
+    database.insert("UPDATE users SET status='inactive' WHERE status = 'active'")
     print('Successfully logged out')

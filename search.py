@@ -1,8 +1,8 @@
-import Database
+import database
 
 def init(search_term):
     #print('it should return items somewhat like this\n1. Saw  $25\n2. Cutter  $34')
-    items = Database.select("SELECT * FROM tools WHERE name LIKE '%" + search_term + "%'")
+    items = database.select("SELECT * FROM tools WHERE name LIKE '%" + search_term + "%'")
     #print(items)
     item_count = 1
     for x in items:
