@@ -15,12 +15,15 @@ def init(search_term):
         if str.isdigit(choice):
             if int(choice) < len(items)+1:
                 wrong = 0
-                view()
+                view(items[int(choice)-1][0])
             else:
                 print('Invalid Response! Try again with any number shown above')
         else:
             print('Type in a digit! Try again with any number shown above')
 
 
-def view():
-    pass
+def view(id):
+    print('View more details')
+    item = database.select("SELECT * FROM tools WHERE id = " + str(id))
+    print(id)
+    print(item)
