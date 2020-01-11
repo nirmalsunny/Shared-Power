@@ -1,3 +1,5 @@
+import Database
+
 def show_login():
     print('Enter your Credentials below')
     username = input('Username: ')
@@ -6,8 +8,15 @@ def show_login():
     print('Trying to log you in...')
 
     # validation
-
-    print('Login Successful')
-    print('-' * 30)
+    sql = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'"
+    if Database.select(sql):
+        logged_user(username)
+    else:
+        print('Incorrect Information! Try Again')
+        show_login()
 
     # options available for logged in customers
+def logged_user(username):
+    print('Login Successful')
+    print('-' * 30)
+    print('Welcome ' + username)
