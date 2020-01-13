@@ -5,25 +5,26 @@ import login
 
 
 def init(search_term):
-    # print('it should return items somewhat like this\n1. Saw  $25\n2. Cutter  $34')
+    # it should return items somewhat like this\n1. Saw  $25\n2. Cutter  $34
     items = database.select("SELECT * FROM tools WHERE name LIKE '%" + search_term + "%'")
-    # print(items)
-    item_count = 1
-    for x in items:
-        # print()
-        print(str(item_count) + '. ' + x[1] + '  ---  $' + str(x[3]) + '/$' + str(x[4]))
-        item_count += 1
-    wrong = 1
-    while wrong:
-        choice = input('Enter any number to view more details: ')
-        if str.isdigit(choice):
-            if int(choice) < len(items) + 1:
-                wrong = 0
-                view(items[int(choice) - 1][0])
+    if items:
+        item_count = 1
+        for x in items:
+            print(str(item_count) + '. ' + x[1] + '  ---  $' + str(x[3]) + '/$' + str(x[4]))
+            item_count += 1
+        wrong = 1
+        while wrong:
+            choice = input('Enter any number to view more details: ')
+            if str.isdigit(choice):
+                if int(choice) < len(items) + 1:
+                    wrong = 0
+                    view(items[int(choice) - 1][0])
+                else:
+                    print('Invalid Response! Try again with any number shown above')
             else:
-                print('Invalid Response! Try again with any number shown above')
-        else:
-            print('Type in a digit! Try again with any number shown above')
+                print('Type in a digit! Try again with any number shown above')
+    else:
+        print('No Results! Do an empty search to view all items')
 
 
 def view(_id):
@@ -42,12 +43,15 @@ def view(_id):
         decision = input('Do you want to book this tool?(y/n)')
         if str.lower(decision) == 'y':
             decision2 = input('Enter mode of collection: (Collect/Pick-up/Drop off)')
+
             date = datetime.datetime.now()
             bdate = str(date.year) + '-' + str(date.month) + '-' + str(date.day)
-
-            sql = "INSERT INTO bookings (item_id, username, date, mode) VALUES ('" \
-                  + str(_id) + "', '" + username + "', '" + bdate + "', '" + decision2 + "') "
-            #print(sql)
+            if decision2 == '':
+                sql = "INSERT INTO bookings (item_id, username, date) VALUES ('" \
+                      + str(_id) + "', '" + username + "', '" + bdate + "')"
+            else:
+                sql = "INSERT INTO bookings (item_id, username, date, mode) VALUES ('" \
+                  + str(_id) + "', '" + username + "', '" + bdate + "', '" + decision2 + "')"
             database.insert(sql)
             print(('Order Executed\n'), ('-' * 30))
         login.logged_user(username)
