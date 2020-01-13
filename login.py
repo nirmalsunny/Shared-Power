@@ -37,7 +37,7 @@ def logged_user(username):
     if choice == '1':
         search.init(input('What are you looking for?'))
     elif choice == '2':
-        user.view_bookings()
+        user.view_bookings(username)
     elif choice == '3':
         user.invoice()
     elif choice == '4':

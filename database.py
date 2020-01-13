@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 def connect():
     mydb = mysql.connector.connect(
         host="remotemysql.com",
@@ -10,6 +11,7 @@ def connect():
 
     return mydb
 
+
 def insert(query):
     mydb = connect()
     mycursor = mydb.cursor()
@@ -17,9 +19,8 @@ def insert(query):
 
     mydb.commit()
 
+
 def select(query):
-    # sql = "INSERT INTO customers (name, address) VALUES (%s, %s)"
-    # val = ("John", "Highway 21")
     mydb = connect()
     mycursor = mydb.cursor()
     mycursor.execute(query)

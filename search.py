@@ -45,12 +45,11 @@ def view(_id):
             date = datetime.datetime.now()
             bdate = str(date.year) + '-' + str(date.month) + '-' + str(date.day)
 
-            sql = "INSERT INTO bookings (item_id, username, date, mode) VALUES ('" + str(_id) + "', '" + username + "', '" + bdate + "', '" + decision2 + "')"
+            sql = "INSERT INTO bookings (item_id, username, date, mode) VALUES ('" \
+                  + str(_id) + "', '" + username + "', '" + bdate + "', '" + decision2 + "') "
             #print(sql)
             database.insert(sql)
             print(('Order Executed\n'), ('-' * 30))
-            login.logged_user(username)
-        else:
-            login.logged_user(username)
+        login.logged_user(username)
     else:
         print('Log in to book this item')
