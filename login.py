@@ -39,7 +39,7 @@ def logged_user(username):
     elif choice == '2':
         user.view_bookings(username)
     elif choice == '3':
-        user.invoice()
+        user.invoice(username)
     elif choice == '4':
         logout()
     else:
