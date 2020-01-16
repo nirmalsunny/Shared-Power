@@ -9,6 +9,13 @@ def is_logged_in():
     else:
         return 0
 
+def is_supplier(username):
+    usertype = database.select("SELECT is_supplier FROM users WHERE username = '" + username + "'")
+    if usertype[0][0] == 'y':
+        return 1
+    else:
+        return 0
+
 def show_login():
     print('Enter your Credentials below')
     username = input('Username: ')
@@ -32,18 +39,35 @@ def logged_user(username):
     print('Welcome ' + username)
     #print('Type L anywhere to logout')
     print('Choose any option below to continue\n')
-    print('1. Book Tools\n2. View Bookings\n3. Invoices\n4. Logout\n')
-    choice = input('Enter your choice: ')
-    if choice == '1':
-        search.init(input('What are you looking for?'))
-    elif choice == '2':
-        user.view_bookings(username)
-    elif choice == '3':
-        user.invoice(username)
-    elif choice == '4':
-        logout()
+    if is_supplier(username):
+        print('1. Book Tools\n2. Add Tools\n3. View Bookings\n4. Invoices\n5. Logout\n')
     else:
-        print('Wrong Input! Try Again')
+        print('1. Book Tools\n2. View Bookings\n3. Invoices\n4. Logout\n')
+    choice = input('Enter your choice: ')
+    if is_supplier(username):
+        if choice == '1':
+            search.init(input('What are you looking for?'))
+        elif choice == '2':
+            user.add_tools(username)
+        elif choice == '3':
+            user.view_bookings(username)
+        elif choice == '4':
+            user.invoice(username)
+        elif choice == '5':
+            logout()
+        else:
+            print('Wrong Input! Try Again')
+    else:
+        if choice == '1':
+            search.init(input('What are you looking for?'))
+        elif choice == '2':
+            user.view_bookings(username)
+        elif choice == '3':
+            user.invoice(username)
+        elif choice == '4':
+            logout()
+        else:
+            print('Wrong Input! Try Again')
 
 def logout():
     database.insert("UPDATE users SET status='inactive' WHERE status = 'active'")

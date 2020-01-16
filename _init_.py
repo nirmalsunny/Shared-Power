@@ -1,8 +1,10 @@
 # Index page of the prototype application
+import database
 import search
 import login
 import register
 import contact
+
 
 def welcome():
     print('---------- Welcome to Shared Power ----------\n')
@@ -22,10 +24,15 @@ def welcome():
         welcome()
 
 
-#persistent login
-user = login.is_logged_in()
-if user:
-    for x in user:
-        login.logged_user(x[0])
-else:
-    welcome()
+
+# persistent login
+def main():
+    user = login.is_logged_in()
+    if user:
+        for x in user:
+            login.logged_user(x[0])
+    else:
+        welcome()
+
+
+main()

@@ -1,5 +1,5 @@
 import datetime
-
+import re
 import database
 
 
@@ -119,4 +119,93 @@ def invoice(username):
         print('-' * 35)
         total += booking[7]
     print('\nTotal Amount: $' + str(total) + '\nInsurance: $5' + '\nAmount Due for Payment: $' + str(total+5))
+
+def add_tools(username):
+    print('Add New Tools\n', ('-' * 40), '\n')
+    print('Fill all the information required\n', ('-' * 30))
+    wrong = 1
+    while wrong:
+        if tname():
+            wrong = 0
+            if description():
+                wrong = 0
+                if price():
+                    wrong = 0
+                    if hprice():
+                        wrong = 0
+                        if a_till():
+                            wrong = 0
+                            add(username)
+                        else:
+                            print('Enter a Date in \'YYYY-MM-DD\'')
+                            wrong = 1
+                    else:
+                        print('Enter a Valid Half Day Price')
+                        wrong = 1
+                else:
+                    print('Enter a Valid Price')
+                    wrong = 1
+            else:
+                print('No Description provided! Enter a Description to continue')
+                wrong = 1
+        else:
+            print('No Name provided! Enter your name to continue')
+
+
+def add(username):
+    database.insert("INSERT INTO tools (name, description, price, hprice, availability, username) VALUES ('"
+                    + name + "', '" + des + "', '" + pprice + "', '" + phprice +  "', '" + atill +  "', '" + username + "')")
+    print('New Tool Added')
+
+
+def tname():
+    temp = input('Tool Name: ')
+    if temp == '':
+        return 0
+    else:
+        global name
+        name = temp
+        return 1
+
+
+def description():
+    temp = input('Description: ')
+    if temp == '':
+        return 0
+    else:
+        global des
+        des = temp
+        return 1
+
+
+def price():
+    temp = input('Enter the Price:  ')
+    if temp.isdigit():
+        global pprice
+        pprice = temp
+        return 1
+    else:
+        return 0
+
+def hprice():
+    temp = input('Enter the Half Day Price:  ')
+    if temp.isdigit():
+        global phprice
+        phprice = temp
+        return 1
+    else:
+        return 0
+
+
+def a_till():
+    temp = input('Available Till: (YYYY-MM-DD)')
+    if re.match('([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))', temp):
+        global atill
+        atill = temp
+        return 1
+    else:
+        return 0
+
+
+
 
