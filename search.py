@@ -51,11 +51,11 @@ def view(_id):
                       + str(_id) + "', '" + username + "', '" + bdate + "')"
             else:
                 sql = "INSERT INTO bookings (item_id, username, date, mode) VALUES ('" \
-                  + str(_id) + "', '" + username + "', '" + bdate + "', '" + decision2 + "')"
+                      + str(_id) + "', '" + username + "', '" + bdate + "', '" + decision2 + "')"
             sql2 = database.insert("UPDATE tools SET status = 'hired' WHERE id = '" + str(_id) + "'")
             database.insert(sql)
             database.insert(sql2)
-            print(('Order Executed\n'), ('-' * 30))
+            print('Order Executed\n', ('-' * 30))
         login.logged_user(username)
     else:
         print('Log in to book this item')

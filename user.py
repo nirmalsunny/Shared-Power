@@ -98,13 +98,13 @@ def invoice(username):
     date = datetime.datetime.now()
     print('Full Name: ', user[0][3], ' ' * 10, 'Username: ', username)
     print('Invoice Date and Time: ', date)
-    print('Invoice Period: 1-' + str(date.month) + '-' + str(date.year) + ' To ' +  str(date.day) + "-" + str(date.month)
-                               + "-" + str(date.year)
+    print('Invoice Period: 1-' + str(date.month) + '-' + str(date.year) + ' To ' + str(date.day) + "-" + str(date.month)
+          + "-" + str(date.year)
           + '\n' + ('-' * 50))
 
     bookings = database.select("SELECT * FROM bookings WHERE username = '" + username
-                              + "' AND NOT total = 0 AND date BETWEEN '" + str(date.year) + "-" + str(date.month)
-                              + "-01' AND '" + str(date.year) + "-" + str(date.month)
+                               + "' AND NOT total = 0 AND date BETWEEN '" + str(date.year) + "-" + str(date.month)
+                               + "-01' AND '" + str(date.year) + "-" + str(date.month)
                                + "-" + str(date.day) + "' ORDER BY date DESC")
     total = 0
     for booking in bookings:
@@ -118,7 +118,8 @@ def invoice(username):
         print('Total Charge: $', booking[7])
         print('-' * 35)
         total += booking[7]
-    print('\nTotal Amount: $' + str(total) + '\nInsurance: $5' + '\nAmount Due for Payment: $' + str(total+5))
+    print('\nTotal Amount: $' + str(total) + '\nInsurance: $5' + '\nAmount Due for Payment: $' + str(total + 5))
+
 
 def add_tools(username):
     print('Add New Tools\n', ('-' * 40), '\n')
@@ -154,7 +155,7 @@ def add_tools(username):
 
 def add(username):
     database.insert("INSERT INTO tools (name, description, price, hprice, availability, username) VALUES ('"
-                    + name + "', '" + des + "', '" + pprice + "', '" + phprice +  "', '" + atill +  "', '" + username + "')")
+                    + name + "', '" + des + "', '" + pprice + "', '" + phprice + "', '" + atill + "', '" + username + "')")
     print('New Tool Added')
 
 
@@ -187,6 +188,7 @@ def price():
     else:
         return 0
 
+
 def hprice():
     temp = input('Enter the Half Day Price:  ')
     if temp.isdigit():
@@ -205,7 +207,3 @@ def a_till():
         return 1
     else:
         return 0
-
-
-
-

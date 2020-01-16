@@ -1,5 +1,5 @@
 # Index page of the prototype application
-import database
+
 import search
 import login
 import register
@@ -22,7 +22,6 @@ def welcome():
     else:
         print('Wrong Input! Try Again')
         welcome()
-
 
 
 # persistent login
