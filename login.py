@@ -1,3 +1,5 @@
+# Handles Login Authentication
+
 import database
 import search
 import user
@@ -18,6 +20,8 @@ def is_supplier(username):
     else:
         return 0
 
+
+# This is shown when User is not Logged In
 
 def show_login():
     print('Enter your Credentials below')
@@ -40,9 +44,10 @@ def show_login():
     # options available for logged in customers
 
 
+# Shows Appropriate Menu Items according to User Type
+
 def logged_user(username):
-    print('Welcome ' + username)
-    # print('Type L anywhere to logout')
+    print('Welcome, ' + username)
     print('Choose any option below to continue\n')
     if is_supplier(username):
         print('1. Book Tools\n2. Add Tools\n3. View Bookings\n4. Invoices\n5. Logout\n')

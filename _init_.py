@@ -1,4 +1,5 @@
 # Index page of the prototype application
+# If the User/Owner is not logged in, welcome() will be shown
 
 import search
 import login
@@ -24,7 +25,9 @@ def welcome():
         welcome()
 
 
-# persistent login
+# Persistent login
+# User/Owner will be logged in till logout
+
 def main():
     user = login.is_logged_in()
     if user:

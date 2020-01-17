@@ -1,5 +1,7 @@
-import datetime
+# It returns the search results and shows more details about it providing with an option to book
+# if the User is logged in.
 
+import datetime
 import database
 import login
 
@@ -26,6 +28,9 @@ def init(search_term):
                 print('Type in a digit! Try again with any number shown above')
     else:
         print('No Results! Do an empty search to view all items')
+
+
+# It will show more details about any item and will ask whether or not to book it.
 
 
 def view(_id):

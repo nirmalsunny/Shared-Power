@@ -1,3 +1,4 @@
+# Handles many a function for Logged In User/Owner
 import datetime
 import re
 import database
@@ -6,6 +7,8 @@ import database
 def days_between(d1, d2):
     return database.select("SELECT DATEDIFF('" + str(d2) + "', '" + str(d1) + "')")[0][0]
 
+
+# Shows Booking Information and asks whether the User wants to Return the Item
 
 def view(booking_id, tool_id):
     print('View more details about your Booking\n', ('-' * 30))
@@ -65,6 +68,8 @@ def view(booking_id, tool_id):
         print('Return Registered\n', ('-' * 30))
 
 
+# Shows all Bookings made by a User
+
 def view_bookings(username):
     print('View your Bookings\n', ('-' * 30))
     bookings = database.select(
@@ -82,7 +87,6 @@ def view_bookings(username):
             if str.isdigit(choice):
                 if int(choice) < len(bookings) + 1:
                     wrong = 0
-                    # view(bookings[int(choice) - 1][0])
                     view(bookings[int(choice) - 1][0], str(x[1]))
                 else:
                     print('Invalid Response! Try again with any number shown above')
@@ -91,6 +95,8 @@ def view_bookings(username):
     else:
         print('No Bookings Yet!')
 
+
+# Shows the Invoice
 
 def invoice(username):
     print('View your Invoice\n', ('-' * 30), '\n\n', ('-' * 15), ' Shared Power ', ('-' * 15))
@@ -120,6 +126,8 @@ def invoice(username):
         total += booking[7]
     print('\nTotal Amount: $' + str(total) + '\nInsurance: $5' + '\nAmount Due for Payment: $' + str(total + 5))
 
+
+# Validation and Insertion of a new Tool by Owners
 
 def add_tools(username):
     print('Add New Tools\n', ('-' * 40), '\n')

@@ -1,3 +1,5 @@
+# Register Module for Validation and Insertion of new Users/Owner
+
 import login
 import database
 
