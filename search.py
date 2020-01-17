@@ -36,7 +36,6 @@ def init(search_term):
 def view(_id):
     print('View more details\n', ('-' * 30))
     item = database.select("SELECT * FROM tools WHERE id = " + str(_id))
-    print(item)
     print((item[0][1]), '\nDescription: ', (item[0][2]), '\n', ('-' * 30))
     print('Full Day Rate: $', (item[0][3]), '\nHalf Day Rate: $', (item[0][4]))
     print('Availability: ', (item[0][5]))
